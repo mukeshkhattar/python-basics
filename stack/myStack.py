@@ -31,4 +31,9 @@ class Stack:
     return len(self.items)
 
 
-
+if __name__ == '__main__':
+  s=Stack()
+  s1=s
+  s.push(10)
+  print(s)
+  print(s1.peek())

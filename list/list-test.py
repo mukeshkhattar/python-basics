@@ -1,4 +1,7 @@
 items=[2,3,4,5,6,7,8,9,10]
+items2=items
+
+print(hex(id(items)), hex(id(items2)))
 
 #insert at 0th position
 items.insert(0,1)
