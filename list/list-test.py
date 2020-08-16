@@ -17,15 +17,19 @@ items[1]=2
 items[1]=1
 print(items)
 
-#delete
+#delete an item given index
 del items[1]
 print(items) # 1,3,4,...10
 items.insert(1,2)
 print(items) # 1,2,3,4,...10
 
-#search
-x=items.index(5)
-print(x, type(x)) # prints 4, int
+#delete an item given value : first occurance only
+items=['a','v','c','v','g','v','k','v']
+items.remove('v')
+print('remove:', items) #['a', 'c', 'v', 'g', 'v', 'k', 'v']
+
+
+#search, raises ValueError if item is not found
 items=['a','v','c','v','g','v','k','v']
 x=items.index('v')
 print(x) # 1
@@ -61,3 +65,28 @@ print(items) # ['abcde', 'abced', 'abcd', 'abc', 'a', 'x']
 items=['x','abcd','abcde','abced','abc','a']
 items.sort(reverse=False,key=my_func)
 print(items) # ['x', 'a', 'abc', 'abcd', 'abcde', 'abced']
+
+#reverse the list
+items=['a','b','c','d','g','x','k','v']
+items.reverse()
+print('reverse list:',items) # ['v', 'k', 'x', 'g', 'd', 'c', 'b', 'a']
+
+#count the item in ths list
+items=['a','v','c','v','g','x','k','v']
+x=items.count('v')
+print('count:',x) # 3
+x=items.count('ko')
+print('count:',x) # 0
+
+#length
+items=['a','v','c','v','g','x','k','v']
+x=len(items)
+print(x) #8
+
+# copy - shallow copy
+items1=['a','v','c','v','g','x','k','v']
+items2=items1
+items1.pop()
+print(items1) #['a', 'v', 'c', 'v', 'g', 'x', 'k']
+print(items2) #['a', 'v', 'c', 'v', 'g', 'x', 'k']
+
