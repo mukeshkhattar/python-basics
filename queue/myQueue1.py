@@ -17,10 +17,10 @@ class Queue:
     if self.isEmpty():
       return float('-inf')
     else:
-      return self.items.pop(0)
+      return self.items.pop()
 
   def enqueue(self,item):
-    self.items.append(item)
+    self.items.insert(0,item)
 
 
   def size(self):

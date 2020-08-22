@@ -54,6 +54,12 @@ items=['a','b','c','d','g','x','k','v']
 items.sort(reverse=True)
 print('sort in reverse:',items) # ['x', 'v', 'k', 'g', 'd', 'c', 'b', 'a']
 
+#sort vs sorted
+list1=[2,1,4,3]
+print('sorted:',sorted(list1)) # [1, 2, 3, 4]
+print('orginianllist',list1) # [2, 1, 4, 3]
+
+
 #sort the list according to length of the string
 items=['a','abcd','abced','abcde','abc']
 def my_func(item):
@@ -93,3 +99,8 @@ items1.pop()
 print(items1) #['a', 'v', 'c', 'v', 'g', 'x', 'k']
 print(items2) #['a', 'v', 'c', 'v', 'g', 'x', 'k']
 
+# merge two lists
+list1=[1,2,3]
+list2=[7,8,9]
+list=list1+list2
+print(list)
