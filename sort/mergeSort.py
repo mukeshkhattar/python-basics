@@ -3,36 +3,35 @@ def sort(list):
   if len(list) <=1:
     return list
   mid=len(list)//2
-  list1=sort(list[:mid])
-  list2=sort(list[mid:])
-  list=merge(list1,list2)
-  return list
-
-def merge(list1,list2):
+  left_half=list[:mid]
+  right_half=list[mid:]
+  sort(left_half)
+  sort(right_half)
+  # merge two lists now
   index1=0
   index2=0
-  list3=[]
-  while index1<len(list1) and index2<len(list2):
-    if list1[index1] <= list2[index2]:
-      list3.append(list1[index1])
+  k=0 # index for the main list to be sorted
+  while index1<len(left_half) and index2<len(right_half):
+    if left_half[index1] <= right_half[index2]:
+      list[k]=left_half[index1]
       index1+=1
     else:
-      list3.append(list2[index2])
+      list[k]=right_half[index1]
       index2+=1
+    k+=1
 
-  while index1<len(list1):
-    list3.append(list1[index1])
+  while index1<len(left_half):
+    list[k]=left_half[index1]
     index1+=1
 
 
-  while index2<len(list2):
-    list3.append(list2[index2])
+  while index2<len(right_half):
+    list[k]=right_half[index1]
     index2+=1
-  print('returning:',list3)
-  return list3
+  print('returning:',list)
 
 
 if __name__ == '__main__':
   list=['s','q','e','t','d','sd','sa']
-  sorted=sort(list)
-  print(sorted)
+  sort(list)
+  print(list)
