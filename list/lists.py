@@ -104,3 +104,50 @@ list1=[1,2,3]
 list2=[7,8,9]
 list=list1+list2
 print(list)
+
+#max value
+list1=[2,3,1000]
+print(max(list1)) # 1000
+names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
+print(max(names)) #'diMeola'
+
+
+#min value
+list1=[2,3,1000]
+print(min(list1)) # 2
+
+# key function used with sort
+names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
+def lowercaseof(anystring):
+  return anystring.lower()
+names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
+print(names.sort(key=lowercaseof)) # 'Adams', 'diMeola', 'Ma', 'Zandusky'
+
+# lambda key function used with sort
+names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
+names.sort(key=lambda anystring:anystring.lower()) # ['Adams', 'diMeola', 'Ma', 'Zandusky']
+print(names)
+
+# lambda key function used with max
+names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
+print(max(names,key=lambda anystring:len(anystring))) #'Zandusky'
+
+# lambda key function used with max
+data = [[12587961, 0.7777777777777778], [12587970, 0.5172413793103449], [12587979, 0.3968253968253968], [12588042, 0.9473684210]]
+print(max(data,key=lambda item:item[1])) #[12588042, 0.947368421]
+index, value=max(data,key=lambda item:item[1])
+print(index,value) # 12588042 0.947368421
+
+# list explode
+list1=[1,2]
+x,y=list1
+print(x,y) # 1 2
+#x,y,z=list1 # error not enough values to unpack
+
+
+#max, all values must be of same type
+list1=[1,2,'x']
+#max(list1) # TypeError
+list1=['1','2','x']
+max(list1) # 'x'
+

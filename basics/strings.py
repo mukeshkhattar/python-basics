@@ -83,3 +83,20 @@ x='caebd1'
 y='234'
 z=x+y
 print(z) # caebd1234
+
+
+#Slicing [m:n]
+print('abcde'[2:3]) #'c'
+print('abcde'[2:]) # 'cde'
+
+#format operator % e.g.
+# s: string
+# d,i: int
+# c:char
+# format modifiers
+# %20d - value in field width of 20
+
+name='name'
+age=20
+
+print('%s is %d years old' % (name, age)) # here age needs to a number
