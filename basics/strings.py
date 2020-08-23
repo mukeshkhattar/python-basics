@@ -51,7 +51,7 @@ isalphanum()
 'www.example.com'.strip('cmowz.') # 'example'
 
 
-#sort vs sorted
+#sort
 x='caebd1'
 x_sorted_list=sorted(x)
 x_sorted_string=''.join(x_sorted_list)
