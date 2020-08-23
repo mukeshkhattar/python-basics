@@ -51,11 +51,7 @@ isalphanum()
 'www.example.com'.strip('cmowz.') # 'example'
 
 
-<<<<<<< HEAD
 #sort-
-=======
-#sort
->>>>>>> 7cd8fab3bcffffb4c184ebd5b1b9e7959f756fc1
 x='caebd1'
 x_sorted_list=sorted(x)
 x_sorted_string=''.join(x_sorted_list)
