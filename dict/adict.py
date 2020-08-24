@@ -7,7 +7,7 @@ adict['x']=5
 adict['y']=7
 
 alist_items=adict.items()
-# alist_items is a list and hence can be sorted:
+# alist_items is a list (of tuples) and hence can be sorted:
 sorted_list_items=sorted(alist_items, key=lambda item:item[1], reverse=True)
 for k,v in sorted_list_items:
   print(k,v)
