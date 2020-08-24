@@ -6,8 +6,20 @@ print(hex(id(items)), hex(id(items2)))
 #insert at 0th position
 items.insert(0,1)
 
-# append
+#list comprehension
+# Given a list of strings,  the count of the number of
+# strings where the string length is 2 or more and the first
+# and last chars of the string are the same.
+def match_ends(words):
+  # +++your code here+++
+  alist=[x for x in words if len(x) >1 and x[0] == x[-1]]
+  return len(alist)
+
+
+# add an item, use append and not index
+items=[]
 items.append(11)
+# items[1]=2 # renders error
 
 # pop removes the last item and returns it
 x=items.pop()
@@ -25,6 +37,10 @@ del items[1]
 print(items) # 1,3,4,...10
 items.insert(1,2)
 print(items) # 1,2,3,4,...10
+
+#dleete a range
+alist=[1,2,3,4,5]
+del alist[-2:]   ## Delete last two elements
 
 #delete an item given value : first occurance only
 items=['a','v','c','v','g','v','k','v']
@@ -66,6 +82,12 @@ def my_func(item):
   return len(item)
 items.sort(key=my_func)
 print(items) # ['a', 'abc', 'abcd', 'abced', 'abcde']
+#alternatively
+items=['a','abcd','abced','abcde','abc']
+items.sort(key=len)
+print(items) # ['a', 'abc', 'abcd', 'abced', 'abcde']
+
+
 
 #sort the list according to length of the string in desc order . Note strings of equal lenth are placed in any order
 items=['a','abcd','abcde','abced','abc','x']
@@ -99,6 +121,20 @@ items1.pop()
 print(items1) #['a', 'v', 'c', 'v', 'g', 'x', 'k']
 print(items2) #['a', 'v', 'c', 'v', 'g', 'x', 'k']
 
+#deep copy
+print('deep copy)')
+alist=[1,2,3,4,5]
+blist=alist
+clist=[]
+clist[:]=alist[:]
+alist.pop()
+print(alist) #[1, 2, 3, 4]
+print(blist) #[1, 2, 3, 4]
+print(clist) #[1, 2, 3, 4, 5]
+
+
+
+
 # merge two lists
 list1=[1,2,3]
 list2=[7,8,9]
@@ -128,6 +164,14 @@ names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
 names.sort(key=lambda anystring:anystring.lower()) # ['Adams', 'diMeola', 'Ma', 'Zandusky']
 print(names)
 
+# Given a list of non-empty tuples, return a list sorted in increasing
+# order by the last element in each tuple.
+alist=[(1, 7), (1, 3), (3, 4, 5), (2, 2)]
+alist.sort(key=lambda atuple: atuple[-1])
+print('sorted tuple list', alist) # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
+
+
+
 # lambda key function used with max
 names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
 print(max(names,key=lambda anystring:len(anystring))) #'Zandusky'
@@ -150,4 +194,29 @@ list1=[1,2,'x']
 #max(list1) # TypeError
 list1=['1','2','x']
 max(list1) # 'x'
+
+# get slice
+alist=[1,2,3,4,5,6]
+blist=alist[2:4]
+print(blist) # [3, 4]
+
+
+# set slice
+alist=[1,2,3,4,5,6]
+blist=[10,11,12]
+alist[:2] =blist[:2]
+print(alist) #[10, 11, 3, 4, 5, 6]
+
+alist=[1,2,3,4,5,6]
+print(alist[2:2]) #[]
+blist=[10,11,12]
+alist[2:2] =blist[:]
+print(alist) # [1, 2, 10, 11, 12, 3, 4, 5, 6]
+
+alist=[1,2,3,4,5,6]
+print(alist[2:3]) #[3]
+blist=[10,11,12]
+alist[2:3] =blist[:]
+print(alist) # [1, 2, 10, 11, 12, 4, 5, 6]
+
 
