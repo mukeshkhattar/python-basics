@@ -13,8 +13,8 @@ def print_top(filename):
   words_count_map_top_20=words_count_map.most_common(20) # it is a list
   words_count_map_top_20.sort(reverse=True, key=lambda atuple:atuple[1])
   print(words_count_map_top_20)
-  for atuple in words_count_map_top_20:
-    print(atuple[0],atuple[1])
+  for k,v in words_count_map_top_20:
+    print(k,v)
 
 
 if __name__ == '__main__':

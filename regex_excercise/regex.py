@@ -96,6 +96,14 @@ for email in emails:
   # do something with each found email string
   print (email)
 
+# findall and groups
+str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
+tuples = re.findall(r'([\w\.-]+)@([\w\.-]+)', str)
+print (tuples)  ## [('alice', 'google.com'), ('bob', 'abc.com')]
+for tuple in tuples:
+  print (tuple[0])  ## username
+  print (tuple[1])  ## host
+
 '''
 findall()  with files
 example below extracts IP addresses from apache file
@@ -105,6 +113,14 @@ f = open('/Users/mukeshkhattar/github_public_repos/examples/Common Data Formats/
 # Feed the file text into findall(); it returns a list of all the found strings
 strings = re.findall(r'[\d]+\.[\d]+\.[\d]+\.[\d]', f.read())
 print(strings)
+
+#subtir=tution
+# this code updates emailaddresses with domain name
+str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
+## re.sub(pat, replacement, str) -- returns new string with all replacements,
+## \1 is group(1), \2 group(2) in the replacement
+print (re.sub(r'([\w\.-]+)@([\w\.-]+)', r'\1@yo-yo-dyne.com', str))
+## purple alice@yo-yo-dyne.com, blah monkey bob@yo-yo-dyne.com blah dishwasher
 
 
 
