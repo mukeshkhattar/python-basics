@@ -1,5 +1,6 @@
 
-
+from datetime import datetime
+#uppercase - str1.upper()
 '''
 count(item)
 endswith(string1)
@@ -46,9 +47,10 @@ isalphanum()
 'qw123'.replace('123','45') # 'qw45'
 'qw123'.replace('1234','45') # 'qw123'
 
-#strip
+#strip - also strips empty line
 '   spacious   '.strip() #'spacious'
 'www.example.com'.strip('cmowz.') # 'example'
+
 
 
 #sort-
@@ -82,6 +84,7 @@ print(id(y)) #4373360304
 x='caebd1'
 y='234'
 z=x+y
+z
 print(z) # caebd1234
 
 
@@ -89,14 +92,14 @@ print(z) # caebd1234
 print('abcde'[2:3]) #'c'
 print('abcde'[2:]) # 'cde'
 
-#format operator % e.g.
-# s: string
-# d,i: int
-# c:char
-# format modifiers
-# %20d - value in field width of 20
+#format
 
-name='name'
-age=20
 
-print('%s is %d years old' % (name, age)) # here age needs to a number
+print(" date - {} time - {}".format(datetime.now().strftime('%m-%d-%y'),datetime.now().strftime('%H-%M-%S'))) # 2020-08-29
+msg1 = 'Fred scored {} out of {} points.'
+msg1.format(3, 10)
+# => 'Fred scored 3 out of 10 points.'
+msg2 = 'Fred {verb} a {adjective} {noun}.'
+msg2.format(adjective='fluffy',
+verb='tickled', noun='hamster')
+# => 'Fred tickled a fluffy hamster.'
