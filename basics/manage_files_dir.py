@@ -46,4 +46,6 @@ os.path.isfile('x')
 
 #last modified
 atimestamp=os.path.getmtime('basics/myfile.txt')
-"date-{} time-{}".format(adatetime.strftime('%m-%d-%y'),adatetime.strftime('%H-%M-%S')) # 2020-08-29 10:07:47
+adatetime=datetime.fromtimestamp(atimestamp)
+type(adatetime)
+"timestamp - {} datetime {} date-{} time-{}".format(atimestamp,adatetime,adatetime.strftime('%m-%d-%y'),adatetime.strftime('%H-%M-%S')) 
