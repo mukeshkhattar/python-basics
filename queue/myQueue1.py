@@ -2,8 +2,8 @@
 Implementtaion of a queue using List class
 the end of the list = rear of the queue
 the begining of the list = front of the queue
-enqueue = O(1)
-dequeue = O(n)
+enqueue = O(n)
+dequeue = O(1)
 '''
 
 class Queue:

@@ -31,21 +31,20 @@ f.close
 
 #large files should be processed line by line instead of reading the whole file in memory
 # if you use With clause, you do not have to call close(). Python will close it for you:
-with open('basics/small.txt','r') as file:
-  for line in file:
+with open('basics/small.txt','r') as afile:
+  for line in afile:
     print(line.strip())
 
-
-
+lines1=[]
 # The f.readlines() method reads the whole file into memory and returns its contents as a list of its lines.
+with open('basics/small.txt','r') as file1:
+  lines1=file1.readlines() #list
 
-with open('basics/small.txt','r') as file:
-  lines=file.readlines() #list
+lines1
 
-print('sorted file:')
-lines.sort()
-for line in lines:
-  print(line)
+with open('basics/small-sorted.txt','w') as file2:
+  for line in lines1:
+    file2.write(line.upper())
 
 #alternatively
 print('alt method- readline():')
@@ -67,6 +66,7 @@ acontent2='my line2\n'
 f.write(acontent1)
 f.write(acontent2)
 f.close
+
 '''
 creates a file with this content:
 my line1
@@ -95,3 +95,18 @@ read the file in a list of lines and clsoe the file
 upadte the lines in list as needed
 open the file in write mode and write the list
 '''
+
+#write vs writelines
+lines=['line1','line2']
+# the following gives error
+#with open('basics/test1txt','w') as file1:
+#  file1.write(lines)
+# This works. Note writelines does not add any new lines
+with open('basics/test1.txt','w') as file1:
+  file1.writelines(lines)
+
+with open('basics/test2.txt','w') as file1:
+  file1.writelines(line+'\n' for line in lines)
+
+
+

@@ -11,8 +11,8 @@ from datetime import datetime
 # check if a file exists
 x = os.path.exists('file') # True / False
 print(x)
-y = os.path.isfile('basics/myfile.txt')
-print(y)
+y = os.path.isfile('basics/myfile.txt') #True
+y
 
 # file size in bytes
 print(os.path.getsize('basics/myfile.txt'))
@@ -48,4 +48,4 @@ os.path.isfile('x')
 atimestamp=os.path.getmtime('basics/myfile.txt')
 adatetime=datetime.fromtimestamp(atimestamp)
 type(adatetime)
-"timestamp - {} datetime {} date-{} time-{}".format(atimestamp,adatetime,adatetime.strftime('%m-%d-%y'),adatetime.strftime('%H-%M-%S')) 
+"timestamp - {} datetime {} date-{} time-{}".format(atimestamp,adatetime,adatetime.strftime('%m-%d-%y'),adatetime.strftime('%H-%M-%S'))

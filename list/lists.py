@@ -22,21 +22,18 @@ items.append(11)
 # items[1]=2 # renders error
 
 # pop removes the last item and returns it
+items=[1,2,3,6,8]
 x=items.pop()
-print(x, type(x))
-print(items) # 10 items values :1 -10
+x
+items
 
 # update
 # items[10]=11 >> error out of range
 items[1]=2
-items[1]=1
-print(items)
+
 
 #delete an item given index
 del items[1]
-print(items) # 1,3,4,...10
-items.insert(1,2)
-print(items) # 1,2,3,4,...10
 
 #dleete a range
 alist=[1,2,3,4,5]
@@ -48,17 +45,23 @@ items.remove('v')
 print('remove:', items) #['a', 'c', 'v', 'g', 'v', 'k', 'v']
 
 
-#search, raises ValueError if item is not found
-items=['a','v','c','v','g','v','k','v']
-x=items.index('v')
-print(x) # 1
-x=items.index('v',x+1)
-print(x) # 3
-x=items.index('v',x+1)
-print(x) # 5
-x=items.index('v',x+1)
-print(x) # 7
+#search for all occurances , raises ValueError if item is not found
 # x=items.index('v',x+1)>>  ValueError
+items=['a','v','c','v','g','v','k','v']
+indexes=[]
+x=items.index('v')
+while x >0:
+  indexes.append(x)
+  try:
+    x=items.index('v',x+1)
+  except Exception as e:
+    print(e)
+    break
+indexes
+
+if 'v' in items:
+  'yes'
+
 
 
 #sort the list in asc oreder
@@ -71,30 +74,36 @@ items.sort(reverse=True)
 print('sort in reverse:',items) # ['x', 'v', 'k', 'g', 'd', 'c', 'b', 'a']
 
 #sort vs sorted
-list1=[2,1,4,3]
+list1=['a','b','c','ae']
+x=sorted(list1)
+x
+x=sorted(list1,reverse=True)
+x
+x=sorted(list1,reverse=True,key=lambda item:len(item))
+x
+x=sorted(list1,reverse=False,key=lambda item:len(item))
+x
+
+
 print('sorted:',sorted(list1)) # [1, 2, 3, 4]
 print('orginianllist',list1) # [2, 1, 4, 3]
 
 
 #sort the list according to length of the string
+
 items=['a','abcd','abced','abcde','abc']
-def my_func(item):
-  return len(item)
-items.sort(key=my_func)
-print(items) # ['a', 'abc', 'abcd', 'abced', 'abcde']
-#alternatively
-items=['a','abcd','abced','abcde','abc']
-items.sort(key=len)
+#items.sort(key=len)
+items.sort(key=lambda item:len(item))
 print(items) # ['a', 'abc', 'abcd', 'abced', 'abcde']
 
 
 
 #sort the list according to length of the string in desc order . Note strings of equal lenth are placed in any order
 items=['a','abcd','abcde','abced','abc','x']
-items.sort(reverse=True,key=my_func)
+items.sort(reverse=True,key=lambda item:len(item))
 print(items) # ['abcde', 'abced', 'abcd', 'abc', 'a', 'x']
 items=['x','abcd','abcde','abced','abc','a']
-items.sort(reverse=False,key=my_func)
+items.sort(reverse=False,key=lambda item:len(item))
 print(items) # ['x', 'a', 'abc', 'abcd', 'abcde', 'abced']
 
 #reverse the list
@@ -152,12 +161,6 @@ print(max(names)) #'diMeola'
 list1=[2,3,1000]
 print(min(list1)) # 2
 
-# key function used with sort
-names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
-def lowercaseof(anystring):
-  return anystring.lower()
-names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
-print(names.sort(key=lowercaseof)) # 'Adams', 'diMeola', 'Ma', 'Zandusky'
 
 # lambda key function used with sort
 names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
@@ -173,8 +176,9 @@ print('sorted tuple list', alist) # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 
 
 # lambda key function used with max
-names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
-print(max(names,key=lambda anystring:len(anystring))) #'Zandusky'
+names = ['Adams', 'Ma', 'DiMeolaswqxqwdqwc', 'Zandusky']
+max(names) ##'Zandusky'
+print(max(names,key=lambda anystring:len(anystring))) # DiMeolaswqxqwdqwc
 
 # lambda key function used with max
 data = [[12587961, 0.7777777777777778], [12587970, 0.5172413793103449], [12587979, 0.3968253968253968], [12588042, 0.9473684210]]
@@ -207,6 +211,7 @@ blist=[10,11,12]
 alist[:2] =blist[:2]
 print(alist) #[10, 11, 3, 4, 5, 6]
 
+# insert a list into another at given index:
 alist=[1,2,3,4,5,6]
 print(alist[2:2]) #[]
 blist=[10,11,12]

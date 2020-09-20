@@ -18,18 +18,19 @@ item.count('xc') # 3
 
 #startswith
 
-#find, returns index of first occurance if found, otherwise -1
+
+#use find and not index,
+# find returns index of first occurance if found, otherwise -1
 'sxcewcec'.find('xc') # 1
 'sxcewcec'.find('xcwdwd') # -1
-
 #index, returns index of first occurance if found, otherwise ValueEroor
 'sxcewcec'.index('xc') # 1
-'sxcewcec'.find('xcwdwd') # ValueErro
+'sxcewcec'.index('xcwdwd') # ValueErro
+
 
 # rfind(sub[, start[, end]]
 '12ece12'.rfind('12') #5
 '12ece12'.rfind('120') #-1
-# rindex - like rfind, but raises ValueEroor when not found
 
 
 
@@ -43,8 +44,8 @@ isnumeric()
 isalphanum()
 '''
 
-#replace
-'qw123'.replace('123','45') # 'qw45'
+#replace all occurances in a string
+'qw123x123'.replace('123','45') # 'qw45x45'
 'qw123'.replace('1234','45') # 'qw123'
 
 #strip - also strips empty line
@@ -52,10 +53,10 @@ isalphanum()
 'www.example.com'.strip('cmowz.') # 'example'
 
 
-
-#sort-
+#sort- sorted returns a list
 x='caebd1'
 x_sorted_list=sorted(x)
+x_sorted_list
 x_sorted_string=''.join(x_sorted_list)
 print('sorted:',x_sorted_string) # 1abcde
 

@@ -12,6 +12,11 @@ https://regexcrossword.com/
 import re
 
 
+# result[0] - the whole string
+# result[1] - first group
+# result[2] - second group and so on
+
+
 
 ## Search for pattern 'iii' in string 'piiig'.
 ## All of the pattern must result, but it may appear anywhere.
@@ -29,19 +34,31 @@ result = re.search(r'igs', 'piiig') # not found, result == None
 r"\bain"
 r"ain\b"
 '''
+result = re.search(r'\bain', 'it is  aining') # found,'ain
+result[0]
 
+#if r flag is not used, \b is treated as a backspace
+result = re.search('\bain', 'it is  aining') # not found
+
+
+\
 # [^arn]	Returns a match for any character EXCEPT a, r, and n
+result = re.search(r'[^arn]', 'rit is  aining')
+result[0] # i
 
 # 	In sets, +, *, ., |, (), $,{} has no special meaning, so [+] means: return a match for any '+' character in the string
 
 ## . = any single char but \n, so ... means 3 chars must result
 result = re.search(r'..g', 'p1kgx') # found, result.group() == "1kg"
 
-## \d = digit char, \w = word char (includes numbers too),
-# \w = [a-zA-Z0-9_]
+## \d = digit char,
+# \w = alphanumeric and _ [a-zA-Z0-9_]
 # In example below, 3 digits and 3 chars must result
 result = re.search(r'\d\d\d', 'p123g') # found, result.group() == "123"
-result = re.search(r'\w\w\w', '@@ab1d!!') # found, result.group() == "ab1"
+result = re.search(r'\w\w\w', '@@ab_1d!!') # found, result.group() == "ab1"
+type(result)
+result[0]
+
 
 ''' Repeatition
 hings get more interesting when you use + and * to specify repetition in the pattern
@@ -106,9 +123,9 @@ result[1] # '12121'
 result = re.search(r'^[a-zA-Z][\w._-]+\@[\w_-]+\.[\w]+', 'mukesh_khattar.k@swd-edc.com') # found: mukesh_khattar.k@swd-edc.com
 result = re.search(r'^[a-zA-Z][\w._-]+\@[\w_-]+\.[\w]+', '1mukesh_khattar.k@swd-edc.com') # not found
 
-# if pattern needs to include literals  '-' and '.' , these need to be escaped. '+' loses its special meaning when used isnide a set
+#  '-'   need to be escaped in set. + and . lose its special meaning when used isnide a set
 
-pattern = '[\w_+\-\.]+\.[a-zA-Z]+'
+pattern = '[\w\-_+.]+\.[a-zA-Z]+'
 result=re.search(pattern, 'a_b-c+d.wdwd.com')
 result[0]
 
@@ -123,12 +140,18 @@ result = re.search(pattern, "wdwd(AM)wdw") # True
 result = re.search(pattern, "wdwd(aswd)wdw") # False
  # exactly 5 digits, and sometimes, but not always, followed by a dash with 4 more digits.
  # The zip code needs to be preceded by at least one space, and cannot be at the start of the text.
-pattern = '(\w)+(\s)+[0-9][0-9][0-9][0-9][0-9](([-][0-9][0-9][0-9][0-9])|(\s))'
+#pattern = '(\w)+(\s)+[0-9][0-9][0-9][0-9][0-9](([-][0-9][0-9][0-9][0-9])|(\s))'
+pattern = '(\w)+(\s)+[0-9]{5}(([-][0-9]{4})|(\s))'
 result = re.search(pattern, "a 21212-0991 wdw") # True
-# eq below
 result[0]
-result.group()
-result.group(0)
+result = re.search(pattern, "a 21212  wdw") # True
+result[0]
+result = re.search(pattern, "a 2122  wdw") # False
+if result:
+  result[0]
+
+
+
 
 # ^- start of string , $ - end of string
 #the text passed qualifies as a top-level web address, meaning that it contains alphanumeric characters (which includes
@@ -145,18 +168,12 @@ The "group" feature of a regular expression allows you to pick out parts of the 
 '''
 str = 'purple alice-b@google.com monkey dishwasher'
 result = re.search(r'([\w.-]+)@([\w.-]+)', str)
-# return tuple of all group values
-result.groups() # ('alice-b', 'google.com')
-#eq below
-result.group(0) ## 'alice-b@google.com' (the whole result)
-result.group() ## 'alice-b@google.com' (the whole result)
 result[0] ## 'alice-b@google.com' (the whole result)
 #extract groups, eq:
-result.group(1)# 'alice-b' (the username, group 1)
-result[1]
+result[1] #'alice-b' (the username, group 1)
 # eq:
-result.group(2) ## 'google.com' (the host, group 2)
-result[2]
+result[2] ## 'google.com' (the host, group 2)
+
 
 
 # pattern to find ln, fn where fn should include
@@ -213,10 +230,12 @@ print(strings)
 # this code updates emailaddresses with domain name
 str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
 ## re.sub(pat, replacement, str) -- returns new string with all replacements,
+## purple alice@yo-yo-dyne.com, blah monkey bob@yo-yo-dyne.com blah dishwasher
+#method:1
 ## \1 is group(1), \2 group(2) in the replacement
 print (re.sub(r'([\w\.-]+)@([\w\.-]+)', r'\1@yo-yo-dyne.com', str))
-## purple alice@yo-yo-dyne.com, blah monkey bob@yo-yo-dyne.com blah dishwasher
-
+#method:2
+print (re.sub(r'@[\w\.-]+', r'@yo-yo-dyne.com', str))
 
 # The split() function returns a list where the string has been split at each match:
 #split at each whitespace:
