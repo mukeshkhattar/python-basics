@@ -1,5 +1,6 @@
 '''
-Implementtaion of a queue using List class
+Queue - FIFO
+Implementtaion of a queue using python List class
 the end of the list = rear of the queue
 the begining of the list = front of the queue
 enqueue = O(n)
@@ -26,12 +27,15 @@ class Queue:
   def size(self):
     return len(self.items)
 
+
   def __repr__(self):
+    print('called')
     return str(self.items)
 
 
 if __name__ == '__main__':
   s=Queue()
+  type(s)
   s.enqueue(10)
   s.enqueue(11)
   s.dequeue()

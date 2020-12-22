@@ -4,6 +4,7 @@ aset.add(1)
 aset.add(2)
 aset.add(3)
 aset.add(5)
+aset.add(2)
 aset
 aset.remove(3)
 aset

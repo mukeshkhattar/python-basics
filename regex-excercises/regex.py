@@ -12,21 +12,31 @@ https://regexcrossword.com/
 import re
 
 
+'''
+search('r'pattern,text) : serach pattern in test, 'r' flag = raw string. which passes through backslashes without change which is very handy for regular expressions
+importance of rflag
+ in particular, \b matches empty string specifically at the start and end of a word.
+ re expects the string \b, however normal string interpretation '\b' is converted to the ASCII backspace character,
+ so you need to either explicitly escape the backslash ('\\b'), or tell python it is a raw string (r'\b').
+'''
+re.findall('\b', 'testb') # without r flag , the backslash gets consumed by the python string interpreter and '\b' is converted to the ASCII backspace character. re module gets backspace.
+#[]
+re.findall('\\b', 'test')  # backslash is explicitly escaped and is passed through to re module
+#['', '']
+re.findall(r'\b', 'test') # often this syntax is easier
+#['', '']
+
+'''
+Search for pattern 'iii' in string 'piiig'.
+On success, result.group() is resulted text.
 # result[0] - the whole string
 # result[1] - first group
 # result[2] - second group and so on
-
-
-
-## Search for pattern 'iii' in string 'piiig'.
-## All of the pattern must result, but it may appear anywhere.
-## On success, result.group() is resulted text.
 '''
-search('r'pattern,text) : serach pattern in test, 'r' flag = raw string. which passes through backslashes without change which is very handy for regular expressions
 result = re.search(r'iii', 'piiig') # found, result.group() == "iii"
-'''
-# result = re.search(r'iii', 'piiig') # found, result.group() == "iii"
 result = re.search(r'igs', 'piiig') # not found, result == None
+if result != None:
+  result[0]
 
 '''
 \b	Returns a match where the specified characters are at the beginning or at the end of a word
@@ -34,19 +44,11 @@ result = re.search(r'igs', 'piiig') # not found, result == None
 r"\bain"
 r"ain\b"
 '''
-result = re.search(r'\bain', 'it is  aining') # found,'ain
+result = re.search(r'\bain', 'it is  aining asas') # found,'ain
 result[0]
 
 #if r flag is not used, \b is treated as a backspace
 result = re.search('\bain', 'it is  aining') # not found
-
-
-\
-# [^arn]	Returns a match for any character EXCEPT a, r, and n
-result = re.search(r'[^arn]', 'rit is  aining')
-result[0] # i
-
-# 	In sets, +, *, ., |, (), $,{} has no special meaning, so [+] means: return a match for any '+' character in the string
 
 ## . = any single char but \n, so ... means 3 chars must result
 result = re.search(r'..g', 'p1kgx') # found, result.group() == "1kg"
@@ -61,7 +63,7 @@ result[0]
 
 
 ''' Repeatition
-hings get more interesting when you use + and * to specify repetition in the pattern
+Things get more interesting when you use + and * to specify repetition in the pattern
 
 + -- 1 or more occurrences of the pattern to its left, e.g. 'i+' = one or more i's
 * -- 0 or more occurrences of the pattern to its left
@@ -82,7 +84,7 @@ result = re.search(r'\d\s*\d\s*\d', 'xx1 2   3xx') # found, result.group() == "1
 result = re.search(r'\d\s*\d\s*\d', 'xx12  3xx') # found, result.group() == "12  3"
 result = re.search(r'\d\s*\d\s*\d', 'xx123xx') # found, result.group() == "123"
 
-## ^ = resultes the start of string, so this fails:
+## ^ = results the start of string, so this fails:
 result = re.search(r'^b\w+', 'foobar') # not found, result == None
 ## but without the ^ it succeeds:
 result = re.search(r'b\w+', 'foobar') # found, result.group() == "bar"
@@ -92,18 +94,27 @@ result = re.search(r'ssa?', 'ssa') # found, result.group() == "ssa"
 result = re.search(r'ssa?', 'sdf') # not found
 result = re.search(r'ssa?', 'ssdf') # found, result.group() == "ss"
 
-#escape a special char e.g. \. \@
+#escape a special char e.g. \.
+# @ does not need to be escaped. However if escaped , it does not make a difference and the result is the same
 #square brackets
 '''
 Square brackets can be used to indicate a set of chars, so [abc] resultes 'a' or 'b' or 'c'.
-The codes \w, \s etc. work inside square brackets too
- dot (.) just means a literal dot.
+The codes \w, \s etc. work inside square brackets too.
+In sets, +, *, ., |, (), $,{} has no special meaning, so
+    [+] means: return a match for any '+' character in the string
+    dot (.) just means a literal dot.
  For the emails problem, the square brackets are an easy way to add '.' and '-' to the set of chars which can appear around the @ with the pattern r'[\w.-]+@[\w.-]+'
 \=
 '''
-result = re.search(r'[\w._-]+\@1[2-9]+', 'x@1122') # not found
-result = re.search(r'[\w._-]+\@1[2-9]+', 'x@122') # found: x@122
-result = re.search(r'[\w._-]+\@[\w_-]+\.[\w]+', 'mukesh_khattar.k@swd-edc.com') # found: mukesh_khattar.k@swd-edc.com
+result = re.search(r'[\w.-]+\@1[2-9]+', 'x@1122') # not found
+result = re.search(r'[\w.-]+\@1[2-9]+', 'x@122') # found: x@122
+result = re.search(r'[\w.-]+\@[\w-]+\.[\w]+', 'mukesh_khattar.k@swd-edc.com') # found: mukesh_khattar.k@swd-edc.com
+
+
+# Inside a set, ^ in a set means exclude. In a normal use (r'^str' ) means starting with
+# example - [^arn]	Returns a match for any character EXCEPT a, r, and n
+result = re.search(r'[^arn]', 'rit is  aining')
+result[0] # i
 
 # escape [] if it is patterns e.g. if we need '[process id]' in the line below
 line ='sqxwc wecwec[12121] xwcwecc'
@@ -125,30 +136,24 @@ result = re.search(r'^[a-zA-Z][\w._-]+\@[\w_-]+\.[\w]+', '1mukesh_khattar.k@swd-
 
 #  '-'   need to be escaped in set. + and . lose its special meaning when used isnide a set
 
-pattern = '[\w\-_+.]+\.[a-zA-Z]+'
+pattern = '[\w\-+.]+\.[a-zA-Z]+'
 result=re.search(pattern, 'a_b-c+d.wdwd.com')
 result[0]
 
 # the hour is between 1 and 12, with no leading zero, followed by a colon, then minutes between 00 and 59, then an optional space, and then AM or PM, in upper or lower case.
 pattern = '([1]?[0-9]):([0-5][0-9])( ?)[AaPp][Mm]'
 result = re.search(pattern, '2:29 PM')
+result[0]
+result[1]
+result[2]
+result[3]
+result[4] # error
 
 # OR condition use | . eg. first char needs to be upper char or digit AND two or more chars AND surrounded by ()
 pattern = '\(([A-Z]|[0-9])[\w]+\)'
 result = re.search(pattern, "wdwd(1aM)wdw") # True
 result = re.search(pattern, "wdwd(AM)wdw") # True
 result = re.search(pattern, "wdwd(aswd)wdw") # False
- # exactly 5 digits, and sometimes, but not always, followed by a dash with 4 more digits.
- # The zip code needs to be preceded by at least one space, and cannot be at the start of the text.
-#pattern = '(\w)+(\s)+[0-9][0-9][0-9][0-9][0-9](([-][0-9][0-9][0-9][0-9])|(\s))'
-pattern = '(\w)+(\s)+[0-9]{5}(([-][0-9]{4})|(\s))'
-result = re.search(pattern, "a 21212-0991 wdw") # True
-result[0]
-result = re.search(pattern, "a 21212  wdw") # True
-result[0]
-result = re.search(pattern, "a 2122  wdw") # False
-if result:
-  result[0]
 
 
 
@@ -157,7 +162,7 @@ if result:
 #the text passed qualifies as a top-level web address, meaning that it contains alphanumeric characters (which includes
 # letters, numbers, and underscores), as well as periods, dashes, and a plus sign,
 # followed by a period and a character-only top-level domain such as ".com", ".info", ".edu", et
-pattern = '^([\w_\-+\.]+)\.([a-zA-Z]+)$'
+pattern = '^([\w\-+\.]+)\/([a-zA-Z]+)$'
 result = re.search(pattern, "web-addres.com/homepage") # True
 result[0]
 
@@ -179,8 +184,7 @@ result[2] ## 'google.com' (the host, group 2)
 # pattern to find ln, fn where fn should include
 # '-' does not need to be escaped if it is first or last char in set
 name = 'last-name, firstname  M.'
-result = re.search(r'^(\w*), (\w*\s*\w*\.?)$', name)
-result = re.search(r'^([\w\s\.-]+), ([\w\s\.]+)$', name)
+result = re.search(r'^([\w\s-]+), ([\w\s\.]+)$', name)
 result[0]
 result[1]
 result[2]
@@ -194,6 +198,17 @@ zip='as 1212 ss'
 result = re.search(r'\d{5}', zip)
 result[0] # None
 
+ # exactly 5 digits, and sometimes, but not always, followed by a dash with 4 more digits.
+ # The zip code needs to be preceded by at least one space, and cannot be at the start of the text.
+#pattern = '(\w)+(\s)+[0-9][0-9][0-9][0-9][0-9](([-][0-9][0-9][0-9][0-9])|(\s))'
+pattern = '(\w)+(\s)+[0-9]{5}(([-][0-9]{4})|(\s))'
+result = re.search(pattern, "a 21212-0991 wdw") # True
+result[0]
+result = re.search(pattern, "a 21212  wdw") # True
+result[0]
+result = re.search(pattern, "a 2122  wdw") # False
+if result:
+  result[0]
 
 
 '''
@@ -213,6 +228,7 @@ str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
 tuples = re.findall(r'([\w\.-]+)@([\w\.-]+)', str)
 print (tuples)  ## [('alice', 'google.com'), ('bob', 'abc.com')]
 for tuple in tuples:
+  tuple
   print (tuple[0])  ## username
   print (tuple[1])  ## host
 
@@ -233,7 +249,9 @@ str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
 ## purple alice@yo-yo-dyne.com, blah monkey bob@yo-yo-dyne.com blah dishwasher
 #method:1
 ## \1 is group(1), \2 group(2) in the replacement
-print (re.sub(r'([\w\.-]+)@([\w\.-]+)', r'\1@yo-yo-dyne.com', str))
+result=re.sub(r'([\w\.-]+)@([\w\.-]+)', r'\1@yo-yo-dyne.com', str)
+result
+str
 #method:2
 print (re.sub(r'@[\w\.-]+', r'@yo-yo-dyne.com', str))
 
@@ -259,13 +277,5 @@ x
 
 # You can control the number of replacements by specifying the count parameter:
 txt = "The rain in Spain"
-x = re.sub("\s", "9",txt,2) # 'The9rain9in9Spain'
+x = re.sub("\s", "9",txt,2)
 x # 'The9rain9in Spain'
-
-# Driver code
-if __name__ == '__main__':
-  result = re.search(r'^[a-zA-Z][\w._-]+\@[\w_-]+\.[\w]+', '1mukesh_khattar.k@swd-edc.com')
-  if result:
-    print ('found:', result.group()) ## 'found word:cat'
-  else:
-    print ('did not find')

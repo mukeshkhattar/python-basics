@@ -38,6 +38,7 @@ del items[1]
 #dleete a range
 alist=[1,2,3,4,5]
 del alist[-2:]   ## Delete last two elements
+alist
 
 #delete an item given value : first occurance only
 items=['a','v','c','v','g','v','k','v']
@@ -58,13 +59,18 @@ while x >0:
     print(e)
     break
 indexes
+# alternatively
+indexes = [i for i, x in enumerate(items) if x == "v"]
+indexes
 
+# search if a value exists in a list
 if 'v' in items:
   'yes'
 
 
 
 #sort the list in asc oreder
+items=['a','v','c','v','g','v','k','v']
 items.sort()
 print(items) #['a', 'c', 'g', 'k', 'v', 'v', 'v', 'v']
 
@@ -77,6 +83,8 @@ print('sort in reverse:',items) # ['x', 'v', 'k', 'g', 'd', 'c', 'b', 'a']
 list1=['a','b','c','ae']
 x=sorted(list1)
 x
+list1
+
 x=sorted(list1,reverse=True)
 x
 x=sorted(list1,reverse=True,key=lambda item:len(item))
@@ -110,6 +118,7 @@ print(items) # ['x', 'a', 'abc', 'abcd', 'abcde', 'abced']
 items=['a','b','c','d','g','x','k','v']
 items.reverse()
 print('reverse list:',items) # ['v', 'k', 'x', 'g', 'd', 'c', 'b', 'a']
+
 
 #count the item in ths list
 items=['a','v','c','v','g','x','k','v']
@@ -164,12 +173,12 @@ print(min(list1)) # 2
 
 # lambda key function used with sort
 names = ['Adams', 'Ma', 'diMeola', 'Zandusky']
-names.sort(key=lambda anystring:anystring.lower()) # ['Adams', 'diMeola', 'Ma', 'Zandusky']
-print(names)
+names.sort(key=lambda item:item.lower()) # ['Adams', 'diMeola', 'Ma', 'Zandusky']
+names
 
 # Given a list of non-empty tuples, return a list sorted in increasing
 # order by the last element in each tuple.
-alist=[(1, 7), (1, 3), (3, 4, 5), (2, 2)]
+alist=[(1, 7), (1, 3), (3, 2, 5), (2, 2)]
 alist.sort(key=lambda atuple: atuple[-1])
 print('sorted tuple list', alist) # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 
