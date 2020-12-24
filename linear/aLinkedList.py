@@ -29,5 +29,9 @@ llist.head.next.next.data
 if llist.head.next.next.next == None:
   'end'
 
-
-
+# Traverse
+current_head=llist.head
+while current_head != None:
+  current_head.data
+  current_head=current_head.next
+  
