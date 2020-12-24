@@ -1,4 +1,4 @@
-# sort the dict by descending order of values
+# set()
 aset= set()
 aset.add(1)
 aset.add(2)
